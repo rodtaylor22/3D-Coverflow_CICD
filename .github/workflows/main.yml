@@ -13,9 +13,9 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker image
-        run: docker build -t ali769/webproject:latest .
+        run: docker build -t rodtaylor222/3d_coverflow_cicd:01
       - name: Publish image to Docker Hub
-        run: docker push ali769/webproject:latest
+        run: docker push rodtaylor222/3d_coverflow_cicd:01
 
   deploy:
     needs: build
@@ -24,8 +24,8 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull image from Docker Hub
-        run: docker pull ali769/webproject:latest
+        run: docker pull rodtaylor222/3d_coverflow_cicd:01
       - name: Delete old container (if exists)
         run: docker rm -f web-app-container || true
       - name: Run Docker container
-        run: docker run -d -p 8080:80 --name web-app-container ali769/webproject:latest
+        run: docker run -d -p 8080:80 --name web-app-container rodtaylor222/3d_coverflow_cicd:01
